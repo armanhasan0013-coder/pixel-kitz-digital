@@ -24,11 +24,25 @@ To get the latest version later: `git pull`, then `npm install`.
 
 Other scripts: `npm run build`, `npm start`, `npm run lint`, `npx tsc --noEmit`.
 
+## Working from more than one computer (owner)
+
+Do this once on each extra Windows PC:
+
+1. Install the tools, then open a new terminal:
+   `winget install --id Git.Git -e`, `winget install --id OpenJS.NodeJS.LTS -e`, `winget install --id GitHub.cli -e`
+2. Sign in to GitHub: `gh auth login --web --git-protocol https`
+3. Download the project: `gh repo clone armanhasan0013-coder/pixel-kitz-digital` then `cd pixel-kitz-digital`
+4. Run the setup: `powershell -ExecutionPolicy Bypass -File scripts\setup-pc.ps1`
+5. To update the live site from this PC too: `npx vercel login`, then `npx vercel link --yes --project pixel-kitz-digital`
+
+After that, open the `pixel-kitz-digital` folder in Claude Code. Each session first downloads the latest version from
+GitHub, and each edit is uploaded when Claude finishes. Let one computer finish (its sync runs) before continuing on the other.
+
 ## Automatic GitHub updates
 
-On the owner's computer, `scripts/auto-sync.ps1` commits and pushes every change to GitHub. Claude Code runs it
-through a `Stop` hook after each editing turn, so the repository always matches the latest edit. After each
-successful push it also redeploys the live site (`vercel deploy --prod`, in the background). Run it by hand
+`scripts/auto-sync.ps1` commits every change, merges anything pushed from another computer, and pushes to GitHub.
+Claude Code runs it through a `Stop` hook after each editing turn (and `-PullOnly` through a `SessionStart` hook).
+After each successful push it also redeploys the live site (`vercel deploy --prod`, in the background). Run it by hand
 after manual edits: `powershell -ExecutionPolicy Bypass -File scripts\auto-sync.ps1`.
 Files in `.gitignore` (`.env.local`, `node_modules`, `.next`, `.data`) are never uploaded.
 
