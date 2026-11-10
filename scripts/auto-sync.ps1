@@ -28,6 +28,16 @@ if ($LASTEXITCODE -ne 0 -or [int]$ahead -gt 0) {
     git push -q origin $branch 2>$null | Out-Null
     if ($LASTEXITCODE -eq 0) { $result = "pushed" } else { $result = "PUSH FAILED (will retry next time)" }
     Add-Content -Path $log -Value "$stamp  $result" -Encoding utf8
+
+    # After a successful push, redeploy the live site on Vercel in the background
+    # (uses the Vercel CLI login on this computer; output goes to .git\vercel-deploy.log).
+    if ($result -eq "pushed" -and (Test-Path (Join-Path $repo ".vercel\project.json"))) {
+        $deployLog = Join-Path $repo ".git\vercel-deploy.log"
+        $cmd = "Set-Location '$repo'; npx --yes vercel deploy --prod --yes *> '$deployLog'"
+        Start-Process -FilePath "powershell" -WindowStyle Hidden `
+            -ArgumentList "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", $cmd
+        Add-Content -Path $log -Value "$stamp  vercel deploy started" -Encoding utf8
+    }
 }
 
 exit 0

@@ -27,7 +27,8 @@ Other scripts: `npm run build`, `npm start`, `npm run lint`, `npx tsc --noEmit`.
 ## Automatic GitHub updates
 
 On the owner's computer, `scripts/auto-sync.ps1` commits and pushes every change to GitHub. Claude Code runs it
-through a `Stop` hook after each editing turn, so the repository always matches the latest edit. Run it by hand
+through a `Stop` hook after each editing turn, so the repository always matches the latest edit. After each
+successful push it also redeploys the live site (`vercel deploy --prod`, in the background). Run it by hand
 after manual edits: `powershell -ExecutionPolicy Bypass -File scripts\auto-sync.ps1`.
 Files in `.gitignore` (`.env.local`, `node_modules`, `.next`, `.data`) are never uploaded.
 
