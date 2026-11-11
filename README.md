@@ -54,6 +54,7 @@ Files in `.gitignore` (`.env.local`, `node_modules`, `.next`, `.data`) are never
 | Services (4 pillars, 59 services, process steps) | `src/content/services.ts` |
 | Digital Solutions catalog (pricing, availability, terms) | `src/content/solutions.ts` |
 | Portfolio projects (10, selected from the founder's Behance) | `src/content/projects.ts` + images in `public/work/<slug>/` |
+| Client testimonials (home page; hidden while the list is empty) | `src/content/testimonials.ts` — real client words only, with permission |
 | Insights articles | `src/content/insights.ts` (`status: "sample"` → `"published"` when approved) |
 | Legal drafts | `src/app/privacy`, `src/app/terms`, `src/app/delivery-refund-policy` |
 | Design tokens (colors, type, motion) | `src/app/globals.css` |

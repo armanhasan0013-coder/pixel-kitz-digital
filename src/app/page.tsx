@@ -5,6 +5,7 @@ import { Hero } from "@/components/home/hero";
 import { PillarExplorer } from "@/components/home/pillar-explorer";
 import { ButtonLink, Container, SectionHeading } from "@/components/ui/primitives";
 import { CtaSection, FounderSection, PortfolioEmptyState, ProjectCard } from "@/components/sections/shared";
+import { TestimonialsSection } from "@/components/sections/testimonials";
 import { SolutionCard } from "@/components/solutions/solution-card";
 import { JsonLd, organizationJsonLd } from "@/lib/seo";
 import { pillars, services } from "@/content/services";
@@ -176,6 +177,9 @@ export default function HomePage() {
           </ol>
         </Container>
       </section>
+
+      {/* Client testimonials — hidden until src/content/testimonials.ts has entries */}
+      <TestimonialsSection limit={4} />
 
       {/* Digital solutions */}
       <section className="border-t border-line bg-ink-2 py-24 sm:py-32" aria-labelledby="solutions-heading">
