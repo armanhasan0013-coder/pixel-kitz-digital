@@ -179,7 +179,7 @@ export default function HomePage() {
       </section>
 
       {/* Client testimonials — hidden until src/content/testimonials.ts has entries */}
-      <TestimonialsSection limit={4} />
+      <TestimonialsSection limit={6} />
 
       {/* Digital solutions */}
       <section className="border-t border-line bg-ink-2 py-24 sm:py-32" aria-labelledby="solutions-heading">

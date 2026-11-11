@@ -7,7 +7,7 @@ import { projects } from "@/content/projects";
 import { testimonials, type Testimonial } from "@/content/testimonials";
 
 function attribution(t: Testimonial) {
-  return [t.role, t.company].filter(Boolean).join(", ");
+  return [t.role, t.company, t.location].filter(Boolean).join(", ");
 }
 
 function TestimonialCard({ testimonial: t, index, featured }: { testimonial: Testimonial; index: number; featured: boolean }) {
@@ -72,7 +72,7 @@ export function TestimonialsSection({ limit }: { limit?: number }) {
         <SectionHeading
           eyebrow="Client testimonials"
           title={<span id="testimonials-heading">In our clients&apos; words.</span>}
-          lede="Feedback from people we've worked with, published with their permission."
+          lede="Reviews left by clients for our founder's design work, quoted exactly as they wrote them."
         />
         <ul
           className={cn(
